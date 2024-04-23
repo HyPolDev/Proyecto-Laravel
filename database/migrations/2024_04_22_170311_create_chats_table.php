@@ -16,9 +16,13 @@ return new class extends Migration
             $table->string("name", 255);
             $table->string("description", 255);
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('game_id');
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('game_id')->references('id')->on('games');
+
         });
     }
 

@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string("gameName", 255);
             $table->string("description", 255);
             $table->string("urlImg", 255);
+
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
