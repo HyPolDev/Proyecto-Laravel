@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,15 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get ('/', function () {
-    return view ("welcome");
+Route::get('/', function () {
+    return view("welcome");
 });
 
-Route::get ('/tasks', [TaskController::class,'getAllTasks']);
-Route::get ('/tasks', [TaskController::class,'createTask']);
-Route::get ('/tasks/{id}', [TaskController::class,'updateTaskById']);
-Route::get ('/tasks/{id}', [TaskController::class,'deleteTaskById']);
+Route::get('/tasks', [TaskController::class, 'getAllTasks'])->middleware('auth:sanctum');
+Route::get('/tasks', [TaskController::class, 'createTask']);
+Route::get('/tasks/{id}', [TaskController::class, 'updateTaskById']);
+Route::get('/tasks/{id}', [TaskController::class, 'deleteTaskById']);
 
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
