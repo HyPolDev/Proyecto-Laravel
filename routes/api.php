@@ -47,12 +47,13 @@ Route::delete('/user/{id}', [UserController::class, 'deleteUser'])->middleware('
 
 Route::post('/game', [GameController::class, 'createGame'])->middleware('auth:sanctum') ->middleware('isSuperAdmin'); //funciona
 Route::delete('/game/{id}', [GameController::class, 'deleteGame'])->middleware('auth:sanctum') ->middleware('isSuperAdmin'); //funciona
-
+Route::get('/game', [GameController::class, 'getAllGames'])->middleware('auth:sanctum'); // funciona
+Route::put('/game/{id}', [GameController::class, 'updateGame'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); // proceso
 
 
 //Chat Esto aun no está
 
-// Route::get('/chat', [ChatController::class, 'getAllChats'])->middleware('auth:sanctum'); //funciona pero aun no hemos metido chats con seeder
+
 // Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('auth:sanctum'); //
 // Route::post('/chat', [ChatController::class, 'createChat'])->middleware('auth:sanctum'); //
 // Route::put('/chat', [])

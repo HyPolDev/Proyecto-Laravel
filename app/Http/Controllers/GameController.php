@@ -60,4 +60,48 @@ class GameController extends Controller
             "message" => "Game deleted successfully."
         ]);
     }
+
+    public function updateGame($id) /// en proceso
+    {
+        $game = Game::find($id);
+
+        try {
+            $game = $request->game();
+            $newGameName = $request->input('gameName');
+
+
+            $existingGame = Game::where('gameName', $newGameName)->first();
+            if ($existingGame && $existingGame->id !== $game->id) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "this game name is already in use"
+                    ],
+                    401
+                );
+            }
+
+            $game->gameName = $newGameName;
+            $game->save();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Game name updated",
+                    "data" => $game
+                ],
+                200
+            );
+
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error updating game name",
+                    "error" => $th->getMessage()
+                ],
+                500
+            );
+        }
+    }
 }
