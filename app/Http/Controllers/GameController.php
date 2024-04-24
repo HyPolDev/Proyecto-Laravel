@@ -61,14 +61,28 @@ class GameController extends Controller
         ]);
     }
 
-    public function updateGame($id) /// en proceso
+    public function updateGame(Request $request, $id)
     {
         $game = Game::find($id);
 
         try {
-            $game = $request->game();
-            $newGameName = $request->input('gameName');
+            $gameId = $id;
 
+            $newGameName = $request->input('gameName');
+            $newDescription = $request->input('description');
+            $newUrlImg = $request->input('urlImg');
+
+            $game = Game::find($gameId);
+
+            if ($newGameName) {
+                $game->gameName = $newGameName;
+            }
+            if ($newDescription) {
+                $game->description = $newDescription;
+            }
+            if ($newUrlImg) {
+                $game->urlImg = $newUrlImg;
+            }
 
             $existingGame = Game::where('gameName', $newGameName)->first();
             if ($existingGame && $existingGame->id !== $game->id) {
@@ -81,7 +95,6 @@ class GameController extends Controller
                 );
             }
 
-            $game->gameName = $newGameName;
             $game->save();
 
             return response()->json(
@@ -92,7 +105,6 @@ class GameController extends Controller
                 ],
                 200
             );
-
         } catch (\Throwable $th) {
             return response()->json(
                 [
