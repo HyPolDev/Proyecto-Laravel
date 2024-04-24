@@ -13,4 +13,9 @@ class UserController extends Controller
         $users = User::all();
         return response()->json($users);
     }
+    public function getProfile(Request $request)
+    {
+        $user = $request->user();
+        return response()->json($user);
+    }
 }
