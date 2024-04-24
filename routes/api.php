@@ -41,12 +41,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/user', [UserController::class, 'getAllUsers'])->middleware('auth:sanctum') ->middleware('isSuperAdmin');
 Route::get('/user/profile', [UserController::class, 'getProfile'])->middleware('auth:sanctum');
 Route::put('/user/profile', [UserController::class, 'updateProfile'])->middleware('auth:sanctum'); // funciona
-
+Route::delete('/user/{id}', [UserController::class, 'deleteUser'])->middleware('auth:sanctum') ->middleware('isSuperAdmin'); //funciona validacion superadmin o admin controlada
 
 //Game 
 
 Route::post('/game', [GameController::class, 'createGame'])->middleware('auth:sanctum') ->middleware('isSuperAdmin'); //funciona
-Route::delete('/game/{id}', [GameController::class, 'deleteGame'])->middleware('auth:sanctum') ->middleware('isSuperAdmin'); //probando
+Route::delete('/game/{id}', [GameController::class, 'deleteGame'])->middleware('auth:sanctum') ->middleware('isSuperAdmin'); //funciona
 
 
 
