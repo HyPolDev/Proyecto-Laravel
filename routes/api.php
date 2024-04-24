@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,10 @@ Route::get ('/tasks', [TaskController::class,'createTask']);
 Route::get ('/tasks/{id}', [TaskController::class,'updateTaskById']);
 Route::get ('/tasks/{id}', [TaskController::class,'deleteTaskById']);
 
+//User
+Route::get ('/user', [UserController::class,'getAllUsers']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//comento esto porque si no lo hago no me funciona la ruta
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
