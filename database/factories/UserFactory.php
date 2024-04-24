@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 
 /**
@@ -25,22 +26,25 @@ class UserFactory extends Factory
 
          if ($count < count($names)) {
              $name = $names[$count];
-             $count++;
-             return [
-                 'userName' => $name,
-                 'email' => strtolower($name) . $count . '@gmail.com', // Añade el contador al email para hacerlo único
-                 'roleName' => $roleNames[$name],
-                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-                 'remember_token' => Str::random(10),
-             ];
-         } else {
-             return [
-                 'userName' => fake()->name(),
-                 'email' => fake()->unique()->safeEmail(),
-                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-                 'remember_token' => Str::random(10),
-             ];
+             if (!User::where('userName', $name)->exists()) { // Asegúrate de que el usuario no exista antes de crearlo
+                 $count++; // Incrementa sólo si el usuario no existe
+                 return [
+                     'userName' => $name,
+                     'email' => strtolower($name) . '@gmail.com',
+                     'roleName' => $roleNames[$name],
+                     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                     'remember_token' => Str::random(10),
+                 ];
+             }
          }
+
+         // Si Marina y Ramiro ya han sido creados, o si el nombre ya existe, crea un usuario aleatorio
+         return [
+             'userName' => fake()->name(),
+             'email' => fake()->unique()->safeEmail(),
+             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+             'remember_token' => Str::random(10),
+         ];
      }
 
 
