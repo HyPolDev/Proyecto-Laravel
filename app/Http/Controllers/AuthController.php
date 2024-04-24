@@ -24,7 +24,7 @@ class AuthController extends Controller
 
             $newUser = new User();
             $newUser->userName  = $userName;
-            $newUser->password  = $password;
+            $newUser->password  = $hashPassword;
             $newUser->email  = $email;
 
             $validator = Validator::make($request->all(), [
@@ -73,9 +73,8 @@ class AuthController extends Controller
             $newUser->email  = $email;
 
             $validator = Validator::make($request->all(), [
-                "userName" => "required|unique:users|max:50",
-                "password" => "required|unique:users",
-                "emil"
+                "email" => "required|exists:users,email",
+                "password" => "required"
             ]);
 
             if ($validator->fails()) {
