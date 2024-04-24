@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //User
-Route::get('/user', [UserController::class, 'getAllUsers'])->middleware('auth:sanctum');
+Route::get('/user', [UserController::class, 'getAllUsers'])->middleware('auth:sanctum') ->middleware('isSuperAdmin');
 Route::get('/user/profile', [UserController::class, 'getProfile'])->middleware('auth:sanctum');
 
 
