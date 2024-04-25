@@ -51,11 +51,13 @@ Route::get('/game', [GameController::class, 'getAllGames'])->middleware('auth:sa
 Route::put('/game/{id}', [GameController::class, 'updateGame'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); // funciona
 
 
-//Chat Esto aun no está
+//Chat
 
-
+Route::post('/chat', [ChatController::class, 'createChat'])->middleware('auth:sanctum'); // funciona
+Route::get('/chat', [ChatController::class, 'getAllChats'])->middleware('auth:sanctum'); // funciona
 // Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('auth:sanctum'); //
-// Route::post('/chat', [ChatController::class, 'createChat'])->middleware('auth:sanctum'); //
+
+//  Esto aun no está
 // Route::put('/chat', [])
 
 //comento esto porque si no lo hago no me funciona la ruta
