@@ -43,7 +43,7 @@ class ChatController extends Controller
 
 
 
-    ////
+    //
     public function getAllChats()
     // {
     //     $chats = Chat::all();
@@ -76,14 +76,36 @@ class ChatController extends Controller
         }
     }
 
-    // public function getProfile(Request $request)
-    // {
-    //     $user = $request->user();
-    //     return response()->json($user);
-    // }
-    // public function updateProfile(Request $request)
-    // {
-    //     $user = $request->user();
-    //     return response()->json($user);
-    // }
+    public function deleteChat($id)
+    {
+        try {
+            $chat = Chat::find($id);
+
+            if (!$chat) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "chat couldn't be deleted successfully"
+                    ],
+                    404
+                );
+            }
+
+            $chat->delete();
+
+            return response()->json([
+                "success" => true,
+                "message" => "Chat deleted successfully."
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "chat couldn't be deleted successfully",
+                    "error" => $th->getMessage()
+                ],
+                500
+            );
+        }
+    }
 }
