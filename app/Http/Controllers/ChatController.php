@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -17,7 +18,39 @@ class ChatController extends Controller
             $chat->game_id = $request->input("game_id");
             $chat->user_id = auth()->user()->id;
 
+            $game_id = $request->input('game_id');
+            $user_id = $chat->id;
+            $user = auth()->user();
 
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'game_id' => 'required'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'name or game invalid'
+                    ]
+                );
+            }
+
+            $chats = chat::query()
+                ->where('game_id', $game_id)
+                ->get();
+
+            foreach ($chats as $chat) {
+                if ($chat->user_id === $user->id) {
+                    return response()->json(
+                        [
+                            'success' => false,
+                            'message' => 'You already have a chat with this game!'
+
+                        ]
+                    );
+                }
+            }
 
             $chat->save();
 
@@ -111,6 +144,55 @@ class ChatController extends Controller
             );
         }
     }
+
+    // public function updateChat(Request $request, $id)
+    // {
+    //     $chat = Chat::find($id);
+
+    //     try {
+    //         $chatId = $id;
+
+    //         $newChatMessage = $request->input('ChatMessage');
+
+
+    //         $chat = Chat::find($chatId);
+
+    //         if ($newChatMessage) {
+    //             $chat->ChatMessage = $newChatMessage;
+    //         }
+
+
+    //         if (!$chat) {
+    //             return response()->json(
+    //                 [
+    //                     "success" => false,
+    //                     "message" => "Chat not found"
+    //                 ],
+    //                 404
+    //             );
+    //         }
+
+    //         $chat->save();
+
+    //         return response()->json(
+    //             [
+    //                 "success" => true,
+    //                 "message" => "Chat name updated",
+    //                 "data" => $chat
+    //             ],
+    //             200
+    //         );
+    //     } catch (\Throwable $th) {
+    //         return response()->json(
+    //             [
+    //                 "success" => false,
+    //                 "message" => "Error updating Chat name",
+    //                 "error" => $th->getMessage()
+    //             ],
+    //             500
+    //         );
+    //     }
+    // }
 
     // public function getProfile(Request $request)
     // {

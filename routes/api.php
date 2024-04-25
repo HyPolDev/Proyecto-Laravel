@@ -28,7 +28,7 @@ Route::get('/', function () {
 // Route::get('/tasks/{id}', [TaskController::class, 'updateTaskById']);
 // Route::get('/tasks/{id}', [TaskController::class, 'deleteTaskById']); //ejemplo GAMES o MENSAJES
 
-
+//Auth
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::delete('/logout', [AuthController::class, 'logOut'])->middleware('auth:sanctum'); //funciona
@@ -56,6 +56,7 @@ Route::put('/game/{id}', [GameController::class, 'updateGame'])->middleware('aut
 Route::post('/chat', [ChatController::class, 'createChat'])->middleware('auth:sanctum'); // funciona
 Route::get('/chat', [ChatController::class, 'getAllChats'])->middleware('auth:sanctum'); // funciona
 Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('auth:sanctum'); // funciona
+Route::delete('/chat/{id}', [ChatController::class, 'deleteChat'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); // funciona
 
 //  Esto aun no está
 // Route::put('/chat', [])
