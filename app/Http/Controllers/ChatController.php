@@ -76,6 +76,42 @@ class ChatController extends Controller
         }
     }
 
+    public function getChatById($id)
+
+    {
+        try {
+            $chats = Chat::find($id);
+
+            if (!$chats) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "this chat not exist"
+                    ],
+                    404
+                );
+            }
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "chats retrieved successfully",
+                    "data" => $chats
+                ],
+                200
+            );
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "chats cant be retrieved successfully",
+                    "error" => $th->getMessage()
+                ],
+                500
+            );
+        }
+    }
+
     // public function getProfile(Request $request)
     // {
     //     $user = $request->user();
