@@ -76,7 +76,7 @@ class ChatController extends Controller
 
 
 
-    ////
+    //
     public function getAllChats()
     // {
     //     $chats = Chat::all();
@@ -145,63 +145,36 @@ class ChatController extends Controller
         }
     }
 
-    // public function updateChat(Request $request, $id)
-    // {
-    //     $chat = Chat::find($id);
+    public function deleteChat($id)
+    {
+        try {
+            $chat = Chat::find($id);
 
-    //     try {
-    //         $chatId = $id;
+            if (!$chat) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "chat couldn't be deleted successfully"
+                    ],
+                    404
+                );
+            }
 
-    //         $newChatMessage = $request->input('ChatMessage');
+            $chat->delete();
 
-
-    //         $chat = Chat::find($chatId);
-
-    //         if ($newChatMessage) {
-    //             $chat->ChatMessage = $newChatMessage;
-    //         }
-
-
-    //         if (!$chat) {
-    //             return response()->json(
-    //                 [
-    //                     "success" => false,
-    //                     "message" => "Chat not found"
-    //                 ],
-    //                 404
-    //             );
-    //         }
-
-    //         $chat->save();
-
-    //         return response()->json(
-    //             [
-    //                 "success" => true,
-    //                 "message" => "Chat name updated",
-    //                 "data" => $chat
-    //             ],
-    //             200
-    //         );
-    //     } catch (\Throwable $th) {
-    //         return response()->json(
-    //             [
-    //                 "success" => false,
-    //                 "message" => "Error updating Chat name",
-    //                 "error" => $th->getMessage()
-    //             ],
-    //             500
-    //         );
-    //     }
-    // }
-
-    // public function getProfile(Request $request)
-    // {
-    //     $user = $request->user();
-    //     return response()->json($user);
-    // }
-    // public function updateProfile(Request $request)
-    // {
-    //     $user = $request->user();
-    //     return response()->json($user);
-    // }
+            return response()->json([
+                "success" => true,
+                "message" => "Chat deleted successfully."
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "chat couldn't be deleted successfully",
+                    "error" => $th->getMessage()
+                ],
+                500
+            );
+        }
+    }
 }
