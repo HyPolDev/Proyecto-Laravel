@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //User
+
 Route::get('/user', [UserController::class, 'getAllUsers'])->middleware('auth:sanctum')->middleware('isSuperAdmin');
 Route::get('/user/profile', [UserController::class, 'getProfile'])->middleware('auth:sanctum');
 Route::put('/user/profile', [UserController::class, 'updateProfile'])->middleware('auth:sanctum'); // funciona
@@ -54,22 +55,18 @@ Route::put('/game/{id}', [GameController::class, 'updateGame'])->middleware('aut
 Route::post('/chat', [ChatController::class, 'createChat'])->middleware('auth:sanctum'); // funciona
 Route::get('/chat', [ChatController::class, 'getAllChats'])->middleware('auth:sanctum'); // funciona
 Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('auth:sanctum'); // funciona
-Route::delete('/chat/{id}', [ChatController::class, 'deleteChat'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); // funciona
-Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('auth:sanctum'); //
-Route::get('/chat/game/{game}', [ChatController::class, 'searchChatsByGame'])->middleware('auth:sanctum');
+Route::delete('/chat/{id}', [ChatController::class, 'deleteChat'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); //funciona
+Route::get('/chat/game/{id}', [ChatController::class, 'searchChatsByGame'])->middleware('auth:sanctum');//funciona
 
 //Message
-Route::post('/chat/message', [MessageController::class, 'createMessage'])->middleware('auth:sanctum');
-Route::get('/chat/message', [MessageController::class, 'getAllMessages'])->middleware('auth:sanctum');
-Route::put('/chat/message/{id}', [MessageController::class, 'updateMessageById'])->middleware('auth:sanctum');
-Route::delete('/chat/message/{id}', [MessageController::class, 'deleteMessageById'])->middleware('auth:sanctum');
 
-Route::get('/messages/{chat_id}', [MessageController::class, 'getAllMessagesFromChat'])->middleware('auth:sanctum');;
+Route::post('/chat/message', [MessageController::class, 'createMessage'])->middleware('auth:sanctum'); //funciona
+Route::put('/chat/message/{id}', [MessageController::class, 'updateMessageById'])->middleware('auth:sanctum'); //funciona
+Route::delete('/chat/message/{id}', [MessageController::class, 'deleteMessageById'])->middleware('auth:sanctum'); //funciona
+
+Route::get('/messages/{chat_id}', [MessageController::class, 'getAllMessagesFromChat'])->middleware('auth:sanctum');; //funciona
 
 
-Route::post('/user_chats', [User_chatController::class, 'enterTheChat'])->middleware('auth:sanctum');
-Route::delete('/user_chats', [User_chatController::class, 'leaveTheChat'])->middleware('auth:sanctum');
-//comento esto porque si no lo hago no me funciona la ruta
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::post('/user_chats', [User_chatController::class, 'enterTheChat'])->middleware('auth:sanctum'); //funciona
+Route::delete('/user_chats', [User_chatController::class, 'leaveTheChat'])->middleware('auth:sanctum'); 
+

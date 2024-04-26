@@ -74,19 +74,12 @@ class ChatController extends Controller
         }
     }
 
-
-
-    //
     public function getAllChats()
-    // {
-    //     $chats = Chat::all();
-    //     return response()->json($chats);
-    // }
+  
     {
         try {
             $chats = Chat::query()
-                ->select('name', 'description', 'user_id', 'game_id')
-                ->where('user_id', auth()->user()->id)
+                ->select('name', 'description', 'game_id')
                 ->get();
 
             return response()->json(
@@ -178,22 +171,20 @@ class ChatController extends Controller
         }
     }
 
-    public function searchChatsByGame($gameName)
+public function searchChatsByGame($gameId)
 {
     try {
-        $game = Game::where('gameName', $gameName)->first();
+        $chats = Chat::where('game_id', $gameId)->get();
 
-        if ($game) {
-            $chats = $game->chats;
-
+        if ($chats->isEmpty()) {
             return response()->json([
-                "success" => true,
-                "chats" => $chats
+                "success" => false,
+                "message" => "No chats found for this game"
             ]);
         } else {
             return response()->json([
-                "success" => false,
-                "message" => "Game not found"
+                "success" => true,
+                "chats" => $chats
             ]);
         }
     } catch (\Throwable $th) {
@@ -207,4 +198,5 @@ class ChatController extends Controller
         );
     }
 }
+
 }
