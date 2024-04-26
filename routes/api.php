@@ -55,7 +55,7 @@ Route::get('/chat', [ChatController::class, 'getAllChats'])->middleware('auth:sa
 Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('auth:sanctum'); // funciona
 Route::delete('/chat/{id}', [ChatController::class, 'deleteChat'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); // funciona
 Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('auth:sanctum'); //
-
+Route::get('/chat/game/{game}', [ChatController::class, 'searchChatsByGame'])->middleware('auth:sanctum');
 
 //Message
 Route::post('/chat/message', [MessageController::class, 'createMessage'])->middleware('auth:sanctum');

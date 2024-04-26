@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
-
+use App\Models\Game;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -177,4 +177,34 @@ class ChatController extends Controller
             );
         }
     }
+
+    public function searchChatsByGame($gameName)
+{
+    try {
+        $game = Game::where('gameName', $gameName)->first();
+
+        if ($game) {
+            $chats = $game->chats;
+
+            return response()->json([
+                "success" => true,
+                "chats" => $chats
+            ]);
+        } else {
+            return response()->json([
+                "success" => false,
+                "message" => "Game not found"
+            ]);
+        }
+    } catch (\Throwable $th) {
+        return response()->json(
+            [
+                "success" => false,
+                "message" => "chats cant be retrieved",
+                "error" => $th->getMessage()
+            ],
+            500
+        );
+    }
+}
 }
