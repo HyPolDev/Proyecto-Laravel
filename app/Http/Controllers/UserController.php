@@ -76,8 +76,8 @@ class UserController extends Controller
                 "message" => "The superadmin or admin cannot be deleted."
             ], 400);
         }
-
-        $user->message()->delete();
+        
+        $user->messages()->delete();
 
         $user->delete();
 
