@@ -46,7 +46,7 @@ class MessageController extends Controller
             $message = new Message;
             $message->text = $request->input('text');
             $message->user_id =  auth()->user()->id;
-            $message->room_id = $request->input('room_id');
+            $message->chat_id = $request->input('chat_id');
 
 
             $message->save();

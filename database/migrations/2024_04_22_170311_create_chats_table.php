@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string("name", 255);
             $table->string("description", 255);
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('game_id');
 
             $table->timestamps();

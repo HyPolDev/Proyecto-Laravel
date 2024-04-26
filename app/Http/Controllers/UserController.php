@@ -61,7 +61,6 @@ class UserController extends Controller
     }
     public function deleteUser($id)
     {
-
         $user = User::find($id);
 
         if (!$user) {
@@ -72,13 +71,13 @@ class UserController extends Controller
         }
 
         if ($user->roleName === '3' || $user->roleName === '2' ) {
-
             return response()->json([
                 "success" => false,
                 "message" => "The superadmin or admin cannot be deleted."
             ], 400);
-            
         }
+
+        $user->message()->delete();
 
         $user->delete();
 

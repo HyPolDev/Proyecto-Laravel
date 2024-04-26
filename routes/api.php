@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +44,7 @@ Route::get('/user/profile', [UserController::class, 'getProfile'])->middleware('
 Route::put('/user/profile', [UserController::class, 'updateProfile'])->middleware('auth:sanctum'); // funciona
 Route::delete('/user/{id}', [UserController::class, 'deleteUser'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); //funciona validacion superadmin o admin controlada
 
-//Game 
+//Game
 
 Route::post('/game', [GameController::class, 'createGame'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); //funciona
 Route::delete('/game/{id}', [GameController::class, 'deleteGame'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); //funciona
@@ -61,6 +62,8 @@ Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('au
 
 //  Esto aun no está
 // Route::put('/chat', [])
+
+Route::post('/chat/message', [MessageController::class, 'createMessage'])->middleware('auth:sanctum');
 
 //comento esto porque si no lo hago no me funciona la ruta
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
