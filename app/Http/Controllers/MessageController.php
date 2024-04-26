@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -105,29 +106,52 @@ class MessageController extends Controller
         }
     }
 
+    public function deleteMessageById($id)
+    {
+        try {
+            $message = Message::find($id);
 
-    // public function deleteMessageById($id)
-    // {
-    //     try {
-    //         $messageDeleted = Message::destroy($id);
+            if (!$message) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Message does not exist",
+                    ],
+                    404
+                );
+            }
 
-    //         return response()->json(
-    //             [
-    //                 "success" => true,
-    //                 "message" => "Message deleted successfully",
-    //                 "data" => $messageDeleted
-    //             ],
-    //             200
-    //         );
-    //     } catch (\Throwable $th) {
-    //         return response()->json(
-    //             [
-    //                 "success" => false,
-    //                 "message" => "Message cant be deleted",
-    //                 "error" => $th->getMessage()
-    //             ],
-    //             500
-    //         );
-    //     }
-    // }
+            $user = Auth::user();
+
+            if ($user->id != $message->user_id) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Unauthorized",
+                    ],
+                    403
+                );
+            }
+
+            $messageDeleted = Message::destroy($id);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Message deleted successfully",
+                    "data" => $messageDeleted
+                ],
+                200
+            );
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Message cant be deleted",
+                    "error" => $th->getMessage()
+                ],
+                500
+            );
+        }
+    }
 }

@@ -60,6 +60,7 @@ Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('au
 //Message
 Route::post('/chat/message', [MessageController::class, 'createMessage'])->middleware('auth:sanctum');
 Route::put('/chat/message/{id}', [MessageController::class, 'updateMessageById'])->middleware('auth:sanctum');
+Route::delete('/chat/message/{id}', [MessageController::class, 'deleteMessageById'])->middleware('auth:sanctum');
 
 //comento esto porque si no lo hago no me funciona la ruta
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
