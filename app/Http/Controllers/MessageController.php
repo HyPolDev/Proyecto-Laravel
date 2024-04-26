@@ -2,44 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
-    // public function getAllMessagesFromRoomById($id)
-    // {
-    //     try {
-    //         // $messages = Message::all();
-    //         $roomId = $id;
-    //         $mymessages = Message::query()
-    //             ->where('room_id', $roomId)
-    //             ->get();
+    public function getAllMessagesFromRoomByGameName($game)
+    {
+        // Comprueba si el juego existe
+        $gameExists = Game::where('gameName', $game)->exists();
 
+        if (!$gameExists) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Game not found",
+                ],
+                404
+            );
+        }
 
+        try {
+            $messages = Message::whereHas('chat', function ($query) use ($game) {
+                $query->whereHas('game', function ($query) use ($game) {
+                    $query->where('gameName', $game);
+                });
+            })->get();
 
-
-
-    //         return response()->json(
-    //             [
-    //                 "success" => true,
-    //                 "message" => "Messages retrieved successfully",
-    //                 "data" => $mymessages
-    //             ],
-    //             200
-    //         );
-    //     } catch (\Throwable $th) {
-    //         return response()->json(
-    //             [
-    //                 "success" => false,
-    //                 "message" => "Messages cant be retrieved successfully",
-    //                 "error" => $th->getMessage()
-    //             ],
-    //             500
-    //         );
-    //     }
-    // }
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Messages retrieved successfully",
+                    "data" => $messages
+                ],
+                200
+            );
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Messages cant be retrieved",
+                    "error" => $th->getMessage()
+                ],
+                500
+            );
+        }
+    }
 
     public function createMessage(Request $request)
     {
