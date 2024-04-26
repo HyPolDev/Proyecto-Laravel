@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
-
+use App\Models\Game;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -88,6 +88,39 @@ class ChatController extends Controller
                 ->select('name', 'description', 'user_id', 'game_id')
                 ->where('user_id', auth()->user()->id)
                 ->get();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "chats retrieved successfully",
+                    "data" => $chats
+                ],
+                200
+            );
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "chats cant be retrieved successfully",
+                    "error" => $th->getMessage()
+                ],
+                500
+            );
+        }
+    }
+
+    public function getChatsByGameName($gameName)
+
+    {
+        try {
+
+            $game = Game::where("gameName", $gameName)
+                ->first();
+
+            $chats = Chat::where("game_id", $game->id)
+                ->get();
+
+
 
             return response()->json(
                 [
