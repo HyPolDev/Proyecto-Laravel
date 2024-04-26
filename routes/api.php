@@ -24,10 +24,6 @@ Route::get('/', function () {
     return view("welcome");
 });
 
-// Route::get('/tasks', [TaskController::class, 'getAllTasks'])->middleware('auth:sanctum');
-// Route::get('/tasks', [TaskController::class, 'createTask']);
-// Route::get('/tasks/{id}', [TaskController::class, 'updateTaskById']);
-// Route::get('/tasks/{id}', [TaskController::class, 'deleteTaskById']); //ejemplo GAMES o MENSAJES
 
 //Auth
 Route::post('/register', [AuthController::class, 'register']);
@@ -60,10 +56,10 @@ Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('au
 Route::delete('/chat/{id}', [ChatController::class, 'deleteChat'])->middleware('auth:sanctum')->middleware('isSuperAdmin'); // funciona
 Route::get('/chat/{id}', [ChatController::class, 'getChatById'])->middleware('auth:sanctum'); //
 
-//  Esto aun no está
-// Route::put('/chat', [])
 
+//Message
 Route::post('/chat/message', [MessageController::class, 'createMessage'])->middleware('auth:sanctum');
+Route::put('/chat/message/{id}', [MessageController::class, 'updateMessageById'])->middleware('auth:sanctum');
 
 //comento esto porque si no lo hago no me funciona la ruta
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
