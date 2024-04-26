@@ -6,16 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
             $table->string("name", 255);
             $table->string("description", 255);
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('game_id');
 
             $table->timestamps();
@@ -24,9 +20,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('chats');

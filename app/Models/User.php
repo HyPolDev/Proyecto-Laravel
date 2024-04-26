@@ -22,5 +22,10 @@ class User extends Model
 
     public $timestamps = true;
 
+    public function messages()
+{
+    return $this->hasMany(Message::class);
+}
+
 }
 
