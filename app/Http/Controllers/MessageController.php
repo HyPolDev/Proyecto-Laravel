@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
 use App\Models\Game;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -9,27 +10,23 @@ use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
-    public function getAllMessagesFromRoomByGameName($game)
+
+    public function getAllMessagesFromChat($id)
     {
-        // Comprueba si el juego existe
-        $gameExists = Game::where('gameName', $game)->exists();
-
-        if (!$gameExists) {
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "Game not found",
-                ],
-                404
-            );
-        }
-
         try {
-            $messages = Message::whereHas('chat', function ($query) use ($game) {
-                $query->whereHas('game', function ($query) use ($game) {
-                    $query->where('gameName', $game);
-                });
-            })->get();
+            $chat = Chat::find($id);
+
+            if (!$chat) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Chat not found",
+                    ],
+                    404
+                );
+            }
+
+            $messages = Message::where('chat_id', $id)->get();
 
             return response()->json(
                 [
@@ -43,7 +40,7 @@ class MessageController extends Controller
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Messages cant be retrieved",
+                    "message" => "Messages can't be retrieved",
                     "error" => $th->getMessage()
                 ],
                 500

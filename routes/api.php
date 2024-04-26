@@ -59,9 +59,11 @@ Route::get('/chat/game/{game}', [ChatController::class, 'searchChatsByGame'])->m
 
 //Message
 Route::post('/chat/message', [MessageController::class, 'createMessage'])->middleware('auth:sanctum');
+Route::get('/chat/message', [MessageController::class, 'getAllMessages'])->middleware('auth:sanctum');
 Route::put('/chat/message/{id}', [MessageController::class, 'updateMessageById'])->middleware('auth:sanctum');
 Route::delete('/chat/message/{id}', [MessageController::class, 'deleteMessageById'])->middleware('auth:sanctum');
-Route::get('/messages/{game}', [MessageController::class, 'getAllMessagesFromRoomByGameName'])->middleware('auth:sanctum');;
+
+Route::get('/messages/{chat_id}', [MessageController::class, 'getAllMessagesFromChat'])->middleware('auth:sanctum');;
 
 //comento esto porque si no lo hago no me funciona la ruta
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
