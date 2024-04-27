@@ -8,10 +8,63 @@
 ##  ⚙️ Endpoints
 <details>
 <summary>🟢Auth</summary>
+
+<details>
+<summary> User Registration</summary>
+
+-   Register new user
+    
+    Registers a new user. The username and email must be unique.
+
+        POST /register
+
+    Body:
+    
+    ```json
+    {
+        "userName": "User",
+        "email": "user@adress.com",
+        "password": "password"
+    }
+    ```
+</details>
+
+<details>
+<summary> User Registration</summary>
+asdflñkj
+</details>
+
+</details>
+
+<details>
+<summary>🟢Users</summary>
 <details>
 <summary>User Registration</summary>
+</details>
+</details>
 
-## ✒️ Autor
+<details>
+<summary>🟢Chats</summary>
+<details>
+<summary>User Registration</summary>
+</details>
+</details>
+
+<details>
+<summary>🟢Messages</summary>
+<details>
+<summary>User Registration</summary>
+</details>
+</details>
+
+<details>
+<summary>🟢Games</summary>
+<details>
+<summary>User Registration</summary>
+</details>
+</details>
+
+## ✒️ The team
 
 - **Marina Escrivá** - ***Project Developer & Designer***
   - [marinaescriva](https://github.com/marinaescriva) 
