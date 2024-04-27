@@ -14,11 +14,10 @@ class CreateUserChatsTable extends Migration
             $table->unsignedBigInteger('chat_id');
             $table->timestamps();
 
-            // Define foreign keys
+          
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('chat_id')->references('id')->on('chats')->onDelete('cascade');
 
-            // Optionally, you can add unique constraints if a user should not be able to join the same chat multiple times.
             $table->unique(['user_id', 'chat_id']);
         });
     }
