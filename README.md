@@ -30,45 +30,360 @@
 </details>
 
 <details>
-<summary> User Registration</summary>
-asdflñkj
+<summary> User Login</summary>
+
+-   Logs a user in
+
+
+        POST /register
+
+    Body:
+    
+    ```json
+    {
+        
+        "email": "user@adress.com",
+        "password": "password"
+    }
+    ```
+
+</details>
+
+<details>
+<summary> User Logout </summary>
+
+-   Logs out the user
+
+
+        DELETE /logout
+
 </details>
 
 </details>
 
 <details>
 <summary>🟢Users</summary>
+
 <details>
-<summary>User Registration</summary>
+<summary>User Management</summary>
+
+-   Retrieve active usernames
+    
+    Retrieves active usernames. Default page is 5 and default page size is 5. If the user is an admin, retrieves all usernames.
+
+        GET /user
+        
+    Parameters:
+    
+    -   `page`: Page number (optional)
+    -   `pageSize`: Number of usernames per page (optional)
+
+</details>
+
+<details>
+<summary> Get self Profile</summary>
+
+-   Retrieves self profile
+
+        GET /user/profile
+
+</details>
+
+<details>
+<summary> Update Profile</summary>
+
+-   Logs a user in
+
+
+        PUT /user/profile
+
+    Body:
+    
+    ```json
+    {
+        
+        "userName": "user"
+    }
+    ```
+
+</details>
+
+<details>
+<summary>Delete User</summary>
+
+-   Deletes User
+
+        DELETE /user/{id}
+        
+    Parameters:
+    
+    -   `id`: userId
+
 </details>
 </details>
 
 <details>
 <summary>🟢Chats</summary>
+
 <details>
-<summary>User Registration</summary>
+<summary> Create Chat</summary>
+
+-   Creates new Chat
+    
+        POST /chat
+
+    Body:
+    
+    ```json
+    {
+        "name": "Chat Name",
+        "description": "Chat description",
+        "game_id": "12345678"
+    }
+    ```
+</details>
+
+<details>
+<summary> Get all chats </summary>
+
+-   Retrieves all chats
+
+        GET /chat
+
+</details>
+
+<details>
+<summary> Get Chat by id  </summary>
+
+-   Retrieves Chat on params id
+
+        GET /chat/{id}
+        
+    Parameters:
+    
+    -   `id`: chat Id
+
+</details>
+
+<details>
+<summary> Delete Chat </summary>
+
+-   Deletes chat on params id
+
+
+        DELETE /chat/{id}
+
+        Parameters:
+    
+    -   `id`: chat Id
+
+</details>
+
+<details>
+<summary> Search chats by game </summary>
+
+-   Retrieves chats from a game
+
+
+        GET /chat/game/{id}
+
+        Parameters:
+    
+    -   `id`: game Id
+
+</details>
+
+<details>
+<summary>Enter a chat</summary>
+
+-   Enters chat on params
+    
+        POST /user_chats
+
+    Body:
+    
+    ```json
+    {
+        "chat_id": "2345678"
+    }
+    ```
+</details>
+
+<details>
+<summary>Leave a chat</summary>
+
+-   Leave Chat on body
+    
+        Detele /user_chats
+
+    Body:
+    
+    ```json
+    {
+        "chat_id": "2345678"
+    }
+    ```
 </details>
 </details>
 
 <details>
 <summary>🟢Messages</summary>
+
 <details>
-<summary>User Registration</summary>
+<summary> Create Message in chat</summary>
+
+-   Creates message in chat given by id on body
+
+
+        POST /chat/message
+
+    Body:
+    
+    ```json
+    {
+        "text": "Example Text",
+    }
+    ```
+
 </details>
+
+<details>
+<summary> Update Message in chat</summary>
+
+-   Updates message in chat given by id on body
+
+
+        POST /chat/message/{id}
+        
+      Parameters:
+    
+    -   `id`: game Id
+
+
+    Body:
+    
+    ```json
+    {
+        
+        "text": "Example Text",
+        "chat_id": "12345678"
+    }
+    ```
+
+</details>
+
+<details>
+<summary> Delete Message in chat</summary>
+
+-   Creates message in chat given by id on params
+
+
+        DELETE /chat/message/{id}
+        
+      Parameters:
+    
+    -   `id`: message Id
+
+
+</details>
+
+<details>
+<summary> Get messages from chat </summary>
+
+-   Retrieves chats from a game
+
+
+        GET /messages/{id}
+
+        Parameters:
+    
+    -   `id`: game Id
+
+</details>
+
 </details>
 
 <details>
 <summary>🟢Games</summary>
+
 <details>
-<summary>User Registration</summary>
+<summary> Get all games</summary>
+
+-   Retrieves all games
+
+        GET /game
+
 </details>
+
+
+<details>
+<summary>Create Game </summary>
+
+-   Registers a game in the database 
+
+
+        POST /game 
+
+    Body:
+    
+    ```json
+    {
+        
+        "gameName": "Your favourite RPG",
+        "description": "Brief description",
+        "urlImg": "https//:gameImage.net"
+    }
+    ```
+
+</details>
+
+<details>
+<summary> Delete Game</summary>
+
+-   Deletes game by id given on params
+
+
+        DELETE /game/{id}
+        
+      Parameters:
+    
+    -   `id`: game Id
+
+</details>
+
+<details>
+<summary> Update Game</summary>
+
+
+-   Updates Game by id given on params
+
+
+        PUT /game/{id}
+        
+      Parameters:
+    
+    -   `id`: game Id
+
+
+    Body:
+    
+    ```json
+    {
+        "gameName": "Your favourite RPG",
+        "description": "Brief description",
+        "urlImg": "https//:gameImage.net"
+    }
+    ```
+
+</details>
+
 </details>
 
 ## ✒️ The team
 
 - **Marina Escrivá** - ***Project Developer & Designer***
   - [marinaescriva](https://github.com/marinaescriva) 
-- **Pol Montero** - ***Project Developer***
+- **Pol Montero** - ***Project Developer & Documentarian***
   - [HyPolDev](https://github.com/hypoldev) 
 - **Ana Pacheco** - ***Project Developer & Tester***
   - [aipacheco](https://github.com/aipacheco) 
