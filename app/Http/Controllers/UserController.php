@@ -5,13 +5,35 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
-    public function getAllUsers()
+    public function getAllUsers(Request $request)
     {
-        $users = User::all();
-        return response()->json($users);
+        try {
+            $limit = $request->query('limit', 5);
+
+            $users = User::simplePaginate($limit);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Users retrieved successfully",
+                    "data" => $users
+                ],
+                200
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Users cant be showed",
+                ]
+            );
+        }
     }
     public function getProfile(Request $request)
     {
@@ -70,13 +92,13 @@ class UserController extends Controller
             ], 404);
         }
 
-        if ($user->roleName === '3' || $user->roleName === '2' ) {
+        if ($user->roleName === '3' || $user->roleName === '2') {
             return response()->json([
                 "success" => false,
                 "message" => "The superadmin or admin cannot be deleted."
             ], 400);
         }
-        
+
         $user->messages()->delete();
 
         $user->delete();
