@@ -81,8 +81,7 @@ The project will be made using the Laravel framework and a SQL database
         
     Parameters:
     
-    -   `page`: Page number (optional)
-    -   `pageSize`: Number of usernames per page (optional)
+    -   `pageSize`: Number of usernames per page (optional | default : 5)
 
 </details>
 
