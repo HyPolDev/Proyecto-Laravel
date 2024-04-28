@@ -1,7 +1,13 @@
+# Lara Games Project
+The first goal of this project is to create an LFG web application, backend for now, that allows employees to contact other colleagues to form groups to play a video game, with the aim of being able to share some leisure time after work.
+The project will be made using the Laravel framework and a SQL database
+<p align="center">
+<img  width="300" height="400" src="./img/Ilustration.jpg" alt="Lara games Img"></p>
+
 
 ## 🛠️ Tech&Tolls used 
 <p align="center">
-<img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"><img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"><img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"><img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white"><img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="200" alt="Laravel Logo"></a></p>
 </p>
 
@@ -396,3 +402,5 @@
 
 
 ## 📄 Add Ons - Bugs and Dreams
+
+- To this date there is no pagination for most *GET* endpoints
