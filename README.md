@@ -9,12 +9,22 @@ The project will be made using the Laravel framework and a SQL database
 <p align="center">
 <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"><img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white"><img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="200" alt="Laravel Logo"></a></p>
+<img src="./img/image.png">
 </p>
+
+## 💾 Local installation
+1. Clone the repository
+2. ` $ php artisan install `
+3. Set the .env file and adjust the params for the database.
+4. Connect to the database.
+5. ``` $ php artisan migrate ```
+6. ``` $ php artisan db:seed "here put the name of the seed" ``` 
+7. ``` $ php artisan serve ``` 
 
 ##  ⚙️ Endpoints
 
 ***All endpoints start with /api/***
-<br>
+
 Example
 
     Post server.ip/api/register
