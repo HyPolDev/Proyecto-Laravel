@@ -1,66 +1,406 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
+# Lara Games Project
+The first goal of this project is to create an LFG web application, backend for now, that allows employees to contact other colleagues to form groups to play a video game, with the aim of being able to share some leisure time after work.
+The project will be made using the Laravel framework and a SQL database
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<img  width="300" height="400" src="./img/Ilustration.jpg" alt="Lara games Img"></p>
+
+
+## 🛠️ Tech&Tolls used 
+<p align="center">
+<img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"><img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white"><img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="200" alt="Laravel Logo"></a></p>
 </p>
 
-## About Laravel
+##  ⚙️ Endpoints
+<details>
+<summary>🟢Auth</summary>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<details>
+<summary> User Registration</summary>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   Register new user
+    
+    Registers a new user. The username and email must be unique.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+        POST /register
 
-## Learning Laravel
+    Body:
+    
+    ```json
+    {
+        "userName": "User",
+        "email": "user@adress.com",
+        "password": "password"
+    }
+    ```
+</details>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<details>
+<summary> User Login</summary>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   Logs a user in
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+        POST /register
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    Body:
+    
+    ```json
+    {
+        
+        "email": "user@adress.com",
+        "password": "password"
+    }
+    ```
 
-### Premium Partners
+</details>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+<details>
+<summary> User Logout </summary>
 
-## Contributing
+-   Logs out the user
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+        DELETE /logout
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+</details>
 
-## Security Vulnerabilities
+</details>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<details>
+<summary>🟢Users</summary>
 
-## License
+<details>
+<summary>User Management</summary>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   Retrieve active usernames
+    
+    Retrieves active usernames. Default page is 5 and default page size is 5. If the user is an admin, retrieves all usernames.
+
+        GET /user
+        
+    Parameters:
+    
+    -   `page`: Page number (optional)
+    -   `pageSize`: Number of usernames per page (optional)
+
+</details>
+
+<details>
+<summary> Get self Profile</summary>
+
+-   Retrieves self profile
+
+        GET /user/profile
+
+</details>
+
+<details>
+<summary> Update Profile</summary>
+
+-   Logs a user in
+
+
+        PUT /user/profile
+
+    Body:
+    
+    ```json
+    {
+        
+        "userName": "user"
+    }
+    ```
+
+</details>
+
+<details>
+<summary>Delete User</summary>
+
+-   Deletes User
+
+        DELETE /user/{id}
+        
+    Parameters:
+    
+    -   `id`: userId
+
+</details>
+</details>
+
+<details>
+<summary>🟢Chats</summary>
+
+<details>
+<summary> Create Chat</summary>
+
+-   Creates new Chat
+    
+        POST /chat
+
+    Body:
+    
+    ```json
+    {
+        "name": "Chat Name",
+        "description": "Chat description",
+        "game_id": "12345678"
+    }
+    ```
+</details>
+
+<details>
+<summary> Get all chats </summary>
+
+-   Retrieves all chats
+
+        GET /chat
+
+</details>
+
+<details>
+<summary> Get Chat by id  </summary>
+
+-   Retrieves Chat on params id
+
+        GET /chat/{id}
+        
+    Parameters:
+    
+    -   `id`: chat Id
+
+</details>
+
+<details>
+<summary> Delete Chat </summary>
+
+-   Deletes chat on params id
+
+
+        DELETE /chat/{id}
+
+        Parameters:
+    
+    -   `id`: chat Id
+
+</details>
+
+<details>
+<summary> Search chats by game </summary>
+
+-   Retrieves chats from a game
+
+
+        GET /chat/game/{id}
+
+        Parameters:
+    
+    -   `id`: game Id
+
+</details>
+
+<details>
+<summary>Enter a chat</summary>
+
+-   Enters chat on params
+    
+        POST /user_chats
+
+    Body:
+    
+    ```json
+    {
+        "chat_id": "2345678"
+    }
+    ```
+</details>
+
+<details>
+<summary>Leave a chat</summary>
+
+-   Leave Chat on body
+    
+        Detele /user_chats
+
+    Body:
+    
+    ```json
+    {
+        "chat_id": "2345678"
+    }
+    ```
+</details>
+</details>
+
+<details>
+<summary>🟢Messages</summary>
+
+<details>
+<summary> Create Message in chat</summary>
+
+-   Creates message in chat given by id on body
+
+
+        POST /chat/message
+
+    Body:
+    
+    ```json
+    {
+        "text": "Example Text",
+    }
+    ```
+
+</details>
+
+<details>
+<summary> Update Message in chat</summary>
+
+-   Updates message in chat given by id on body
+
+
+        POST /chat/message/{id}
+        
+      Parameters:
+    
+    -   `id`: game Id
+
+
+    Body:
+    
+    ```json
+    {
+        
+        "text": "Example Text",
+        "chat_id": "12345678"
+    }
+    ```
+
+</details>
+
+<details>
+<summary> Delete Message in chat</summary>
+
+-   Creates message in chat given by id on params
+
+
+        DELETE /chat/message/{id}
+        
+      Parameters:
+    
+    -   `id`: message Id
+
+
+</details>
+
+<details>
+<summary> Get messages from chat </summary>
+
+-   Retrieves chats from a game
+
+
+        GET /messages/{id}
+
+        Parameters:
+    
+    -   `id`: game Id
+
+</details>
+
+</details>
+
+<details>
+<summary>🟢Games</summary>
+
+<details>
+<summary> Get all games</summary>
+
+-   Retrieves all games
+
+        GET /game
+
+</details>
+
+
+<details>
+<summary>Create Game </summary>
+
+-   Registers a game in the database 
+
+
+        POST /game 
+
+    Body:
+    
+    ```json
+    {
+        
+        "gameName": "Your favourite RPG",
+        "description": "Brief description",
+        "urlImg": "https//:gameImage.net"
+    }
+    ```
+
+</details>
+
+<details>
+<summary> Delete Game</summary>
+
+-   Deletes game by id given on params
+
+
+        DELETE /game/{id}
+        
+      Parameters:
+    
+    -   `id`: game Id
+
+</details>
+
+<details>
+<summary> Update Game</summary>
+
+
+-   Updates Game by id given on params
+
+
+        PUT /game/{id}
+        
+      Parameters:
+    
+    -   `id`: game Id
+
+
+    Body:
+    
+    ```json
+    {
+        "gameName": "Your favourite RPG",
+        "description": "Brief description",
+        "urlImg": "https//:gameImage.net"
+    }
+    ```
+
+</details>
+
+</details>
+
+## ✒️ The team
+
+- **Marina Escrivá** - ***Project Developer & Designer***
+  - [marinaescriva](https://github.com/marinaescriva) 
+- **Pol Montero** - ***Project Developer & Documentarian***
+  - [HyPolDev](https://github.com/hypoldev) 
+- **Ana Pacheco** - ***Project Developer & Tester***
+  - [aipacheco](https://github.com/aipacheco) 
+- **Ramiro Poblete** - ***Project Developer & Yogurt Eater*** 
+  - [Ramer8](https://github.com/ramer8) 
+
+## 🎓 Special Thanks
+
+- To **Geekshubs Academy** for the trust, encouragement and knowledges to make me able to develop this first project.
+
+
+## 📄 Add Ons - Bugs and Dreams
+
+- To this date there is no pagination for most *GET* endpoints
