@@ -12,6 +12,13 @@ The project will be made using the Laravel framework and a SQL database
 </p>
 
 ##  ⚙️ Endpoints
+
+***All endpoints start with /api/***
+<br>
+Example
+
+    Post server.ip/api/register
+
 <details>
 <summary>🟢Auth</summary>
 
@@ -400,6 +407,10 @@ The project will be made using the Laravel framework and a SQL database
 - To **Geekshubs Academy** for the trust, encouragement and knowledges to make us able to colaborate and develop this project
 
 
-## 📄 Add Ons - Bugs and Dreams
+## ☑️ Add Ons - Bugs and Dreams
 
 - To this date there is no pagination for most *GET* endpoints
+
+## 📄 License 
+
+This project is under a MIT license. Check out the  `LICENSE` file for more and extended details about it.
