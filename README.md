@@ -392,12 +392,12 @@ The project will be made using the Laravel framework and a SQL database
   - [HyPolDev](https://github.com/hypoldev) 
 - **Ana Pacheco** - ***Project Developer & Tester***
   - [aipacheco](https://github.com/aipacheco) 
-- **Ramiro Poblete** - ***Project Developer & Yogurt Eater*** 
+- **Ramiro Poblete** - ***Project Developer & Pagination Manager*** 
   - [Ramer8](https://github.com/ramer8) 
 
 ## 🎓 Special Thanks
 
-- To **Geekshubs Academy** for the trust, encouragement and knowledges to make me able to develop this first project.
+- To **Geekshubs Academy** for the trust, encouragement and knowledges to make us able to colaborate and develop this project
 
 
 ## 📄 Add Ons - Bugs and Dreams
